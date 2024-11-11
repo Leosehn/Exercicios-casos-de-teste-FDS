@@ -48,4 +48,16 @@ class FincionarioTests {
 		assertEquals(expectedResult, funcionario.getIRPF(), 0.00000001,
 				() -> first + " should equal " + expectedResult);
 	}
+
+	@ParameterizedTest(name = "{0}, {1}")
+    @CsvSource({
+        "2500.0, 2387.5",
+        "5000.0, 4475.0",
+        "2501.0, 2388.335",
+        "5001.0, 4700.88"
+    })
+    void testGetSalarioLiquido(double salarioBruto, double salarioLiquido) {
+        Funcionario funcionario = new Funcionario(salarioBruto);
+        assertEquals(salarioLiquido, funcionario.getSalarioLiquido(), 0.001);
+    }
 }
